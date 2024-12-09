@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: three-tier-app-config
+  namespace: three-tier-app
+data:
+  # Database Configuration
+  DB_HOST: "mysql-service"
+  DB_PORT: "3306"
+  DB_NAME: "three_tier_db"
+  
+  # Backend Configuration
+  BACKEND_PORT: "8080"
+  
+  # Frontend Configuration
+  FRONTEND_PORT: "80"
+  
+  # Environment-specific settings
+  ENVIRONMENT: "production"
+  
+  # Logging Configuration
+  LOG_LEVEL: "info"
+  
+  # Additional Application Configurations
+  MAX_CONNECTIONS: "100"
+  CACHE_ENABLED: "true"
+  
+  # External Service Endpoints
+  EXTERNAL_SERVICE_URL: "https://external-service.example.com"
