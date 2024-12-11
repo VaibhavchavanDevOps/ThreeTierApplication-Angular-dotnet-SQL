@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: mssql-loadbalancer-service
+  name: mssql-service
 spec:
   selector:
     app: mssql
