@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+  labels:
+    app: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend
+        image: vaibhavnitor/backend-image:latest
+        ports:
+        - containerPort: 80
+        - containerPort: 1433  # Exposing port for SQL Server
+        env:
+        - name: DATABASE_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: backend-config
+              key: DATABASE_HOST
+        - name: DATABASE_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: backend-config
+              key: DATABASE_PORT
+        - name: DATABASE_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: backend-config
+              key: DATABASE_NAME
+        - name: DATABASE_USER
+          valueFrom:
+            secretKeyRef:
+              name: database-credentials
+              key: DATABASE_USER
+        - name: DATABASE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: database-credentials
+              key: DATABASE_PASSWORD
+        resources:
+          requests:
+            cpu: "50m"
+            memory: "1Gi"
+          limits:
+            cpu: "250m"
+            memory: "2Gi"
+        readinessProbe:
+          exec:
+            command:
+              - ls
+          initialDelaySeconds: 60  # Wait for 60 seconds before checking
+          periodSeconds: 10  # Check every 10 seconds
+        livenessProbe:
+          exec:
+            command:
+              - ls
+          initialDelaySeconds: 90  # Wait for 90 seconds before checking
+          periodSeconds: 20  # Check every 20 seconds

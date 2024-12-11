@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: backend-config
+data:
+  DATABASE_HOST: mssql-service
+  DATABASE_PORT: "1433"
+  DATABASE_NAME: ElectricDB
