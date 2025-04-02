@@ -1,0 +1,21 @@
+name: My First GitHub Action  # Workflow Name
+
+on:
+  push:                        # Run on push events
+    branches:
+      - main                   # Only for the main branch
+  pull_request:                 # Also run on pull requests
+
+jobs:
+  my_first_job:                 # Define a job
+    runs-on: ubuntu-latest      # Run on the latest Ubuntu runner
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4   # Fetch repository code
+
+      - name: Run a Shell Command
+        run: echo "Hello, GitHub Actions!"
+
+      - name: List Files in Repository
+        run: ls -la
