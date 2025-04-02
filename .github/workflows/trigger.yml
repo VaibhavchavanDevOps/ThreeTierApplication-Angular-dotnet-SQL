@@ -1,0 +1,15 @@
+name: Trigger Jenkins Job
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  trigger:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Jenkins Job
+        run: |
+          curl -X POST "http://3.83.79.137:8080/job/resi_ci/build" \
+            --user "resilinc:11005eea0a71f7b04700a0cbc5cd2632e4"
