@@ -11,5 +11,5 @@ jobs:
     steps:
       - name: Trigger Jenkins Job
         run: |
-          curl -X POST "http://3.83.79.137:8080/job/resi_ci/build" \
+          curl -X POST "http://3.83.79.137:8080/job/resi_ci/build?token=my_secret_token" \
             --user "resilinc:11005eea0a71f7b04700a0cbc5cd2632e4"
